@@ -7,7 +7,7 @@ namespace PremiumFinder.ApiServices.Models
 {
     public class PremiumResponse
     {
-        public string Rating { get; set; }
+        public string RatingDesc { get; set; }
 
         public decimal DeathPremium { get; set; }
     }

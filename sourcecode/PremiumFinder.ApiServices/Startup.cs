@@ -9,6 +9,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PremiumDomain.Infrastructure;
 using PremiumDomain.Services;
+using PremiumFinder.ApiServices.Logging;
+using PremiumFinder.ApiServices.MiddleWare;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,6 +61,10 @@ namespace PremiumFinder.ApiServices
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            Serilog.Log.Logger = Logger.ConfigureLogger(Configuration, app);
+
+            app.UseMiddleware<GlobalExceptionHandler>(env.IsDevelopment());
 
             app.UseCors("uiPortal");
 

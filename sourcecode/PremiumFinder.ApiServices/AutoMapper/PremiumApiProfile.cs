@@ -13,7 +13,13 @@ namespace PremiumFinder.ApiServices.AutoMapper
         public PremiumApiProfile()
         {
             CreateMap<Occupation, OccupationResponse>();
+
             CreateMap<PremiumView, PremiumResponse>();
+
+            CreateMap<PremiumCalcRequest, PremiumRequestView>()
+                .ForMember(map => map.OccupationId, des => des.MapFrom(src => src.OccupationId))
+                .ForMember(map => map.SumInsured, des => des.MapFrom(src => src.DeathSumInsured))
+                .ForMember(map => map.DateOfBirth, des => des.MapFrom(src => src.DateOfBirth));
         }
     }
 }

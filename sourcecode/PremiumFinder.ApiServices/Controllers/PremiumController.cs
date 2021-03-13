@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using PremiumDomain.Model;
 using PremiumDomain.Services;
 using PremiumFinder.ApiServices.Models;
 using System.Collections.Generic;
@@ -30,7 +31,9 @@ namespace PremiumFinder.ApiServices.Controllers
         [HttpPost]
         public IActionResult GetPremium(PremiumCalcRequest userData)
         {
-            var response = _mapper.Map<PremiumResponse>(_premiumService.CalculatePremium(userData.DeathSumInsured, userData.OccupationId, userData.DateOfBirth));
+            var premiumReq = _mapper.Map<PremiumRequestView>(userData);
+            var response = _mapper.Map<PremiumResponse>(_premiumService.CalculatePremium(premiumReq));
+
             return Ok(response);
         }
     }

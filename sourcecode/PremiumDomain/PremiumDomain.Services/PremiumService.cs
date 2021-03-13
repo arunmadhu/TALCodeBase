@@ -16,20 +16,20 @@ namespace PremiumDomain.Services
             _occupationRepository = occupationRepository;
         }
 
-        public PremiumView CalculatePremium(int sumInsured, int occupationId, DateTime dateOfBirth)
+        public PremiumView CalculatePremium(PremiumRequestView premiumRequest)
         {
             decimal deathPremium;
             var response = new PremiumView();
-            var age = DateTime.Now.Year - dateOfBirth.Year;
+            var age = DateTime.Now.Year - premiumRequest.DateOfBirth.Year;
 
-            if (DateTime.Now.DayOfYear < dateOfBirth.DayOfYear)
+            if (DateTime.Now.DayOfYear < premiumRequest.DateOfBirth.DayOfYear)
                 age--;
 
-            var occupation =  _occupationRepository.GetOccupationById(occupationId);
+            var occupation =  _occupationRepository.GetOccupationById(premiumRequest.OccupationId);
 
             if (occupation != null)
             {
-                deathPremium = ((sumInsured * occupation.Rating.Factor * age) / 1000) * 12;
+                deathPremium = ((premiumRequest.SumInsured * occupation.Rating.Factor * age) / 1000) * 12;
 
                 response.DeathPremium = Math.Round(deathPremium, 2);
                 response.Rating = occupation.Rating.RatingName;

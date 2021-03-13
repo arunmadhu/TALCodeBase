@@ -9,6 +9,6 @@ namespace PremiumDomain.Services
     {
         IList<Occupation> GetOccupations();
 
-        PremiumView CalculatePremium(int sumInsured, int occupationId, DateTime dateOfBirth);
+        PremiumView CalculatePremium(PremiumRequestView premiumRequest);
     }
 }
