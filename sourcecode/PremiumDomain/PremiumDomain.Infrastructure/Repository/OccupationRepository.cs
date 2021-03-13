@@ -15,9 +15,9 @@ namespace PremiumDomain.Infrastructure.Repository
         
         }
 
-        public Task<Occupation> GetOccupationByIdAsync(int occupationId)
+        public Occupation GetOccupationById(int occupationId)
         {
-            return GetAll().FirstOrDefaultAsync(o => o.OccupationId == occupationId);
+            return GetAll().FirstOrDefaultAsync(o => o.OccupationId == occupationId).Result;
         }
 
         public IList<Occupation> GetOccupations()

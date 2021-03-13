@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace PremiumDomain.Infrastructure 
 {
-    interface IOccupationRepository
+    public interface IOccupationRepository
     {
         IList<Occupation> GetOccupations();
 
-        Task<Occupation> GetOccupationByIdAsync(int occupationId);
+         Occupation GetOccupationById(int occupationId);
     }
 }
