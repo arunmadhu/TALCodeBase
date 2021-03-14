@@ -9,7 +9,7 @@ export class AppsettingService {
 
 
   loadData() {
-    return this._http.get<AppsettingsModel>('../../../assets/appSettings/appSettings.json')
+    return this._http.get<AppsettingsModel>('../../assets/appSettings/appSettings.json')
       .toPromise()
       .then(result => {
         this.appSettingsData = (result) as AppsettingsModel;
