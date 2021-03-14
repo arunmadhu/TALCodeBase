@@ -68,7 +68,7 @@ namespace PremiumDomain.ServicesTest
 
             Assert.IsNotNull(response);
             Assert.AreEqual(response.DeathPremium, 1575000.00M);
-            Assert.AreEqual(response.Rating, "Heavy Manual");
+            Assert.AreEqual(response.RatingDesc, "Heavy Manual");
         }
     }
 }

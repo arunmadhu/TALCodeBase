@@ -12,19 +12,22 @@
             </div>
           </div>
           <div class="form-group">
-            <label>Date of Birth</label>
+            <label>Date of Birth (MM/DD/YYYY)</label>
             <input matInput [matDatepicker]="picker" formControlName="dob" class="form-control" [ngClass]="{ 'is-invalid': submitted && form.dob.errors }" />
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             <div *ngIf="submitted && form.dob.errors" class="invalid-feedback">
               <div *ngIf="form.dob.errors.required">Date of birth is required</div>
             </div>
+            <div class="alert alert-danger" role="alert" *ngIf="isfutureDate">
+              Date of birth should be a date from the past. 
+            </div>
           </div>
 
           <div class="form-group">
             <label>Occupation</label>
 
-            <mat-select formControlName="occupation">
+            <mat-select formControlName="occupation" (change)="onSubmit()">
               <mat-option *ngFor="let ocp of occupations" [value]="ocp.occupationId" class="form-control" >
                 {{ocp.occupationName}}
               </mat-option>
@@ -33,11 +36,16 @@
           </div>
           <div class="form-group">
             <label>Sum Insured</label>
-            <input type = "number" formControlName="sumInsured" class="form-control" [ngClass]="{ 'is-invalid': submitted && form.sumInsured.errors }" />
+            <input type = "number" min="1" formControlName="sumInsured" class="form-control" [ngClass]="{ 'is-invalid': submitted && form.sumInsured.errors }" />
             <div *ngIf="submitted && form.sumInsured.errors" class="invalid-feedback">
               <div *ngIf="form.sumInsured.errors.required">Sum Insured is required</div>
-              <div *ngIf="form.sumInsured.errors.minlength">Sum Insured must be at least 6 characters</div>
             </div>
+            <div class="alert alert-danger" *ngIf="invalidSumInsured">
+              Sum Insured should be greater than 1. 
+            </div>
+          </div>
+          <div class="alert alert-success" role="alert" *ngIf="premiumFound">
+            As your job rating is {{rating}}, the premium to be paid will be {{premium | currency:'USD'}}
           </div>
           <div class="form-group">
             <button [disabled]="loading" class="btn btn-primary">Submit</button>

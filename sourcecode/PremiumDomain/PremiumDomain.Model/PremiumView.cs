@@ -6,7 +6,7 @@ namespace PremiumDomain.Model
 {
     public class PremiumView
     {
-        public string Rating { get; set; }
+        public string RatingDesc { get; set; }
 
         public decimal DeathPremium { get; set; }
     }

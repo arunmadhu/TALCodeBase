@@ -32,7 +32,7 @@ namespace PremiumDomain.Services
                 deathPremium = ((premiumRequest.SumInsured * occupation.Rating.Factor * age) / 1000) * 12;
 
                 response.DeathPremium = Math.Round(deathPremium, 2);
-                response.Rating = occupation.Rating.RatingName;
+                response.RatingDesc = occupation.Rating.RatingName;
             }
 
             return response;
