@@ -2,13 +2,14 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PremiumDomain.Infrastructure;
 using PremiumFinder.ApiServices;
 using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace WebApi.IntegrationTest
+namespace WebApi.xUnitIntegrationTest
 {
     public class CustomWebFactory<TStartup> : WebApplicationFactory<Startup>
     {
