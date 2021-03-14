@@ -27,7 +27,7 @@
           <div class="form-group">
             <label>Occupation</label>
 
-            <mat-select formControlName="occupation" (selectionChange)="onSubmit()">
+            <mat-select formControlName="occupation" (selectionChange)="onSubmit()" [disabled] ="isActionProgress">
               <mat-option *ngFor="let ocp of occupations" [value]="ocp.occupationId" class="form-control" >
                 {{ocp.occupationName}}
               </mat-option>
@@ -35,7 +35,7 @@
            
           </div>
           <div class="form-group">
-            <label>Sum Insured</label>
+            <label>Sum Insured ($)</label>
             <input type = "number" min="1" formControlName="sumInsured" class="form-control" [ngClass]="{ 'is-invalid': submitted && form.sumInsured.errors }" />
             <div *ngIf="submitted && form.sumInsured.errors" class="invalid-feedback">
               <div *ngIf="form.sumInsured.errors.required">Sum Insured is required</div>
@@ -47,7 +47,12 @@
           <div class="alert alert-success" role="alert" *ngIf="premiumFound">
             As your job rating is {{rating}}, the premium to be paid will be {{premium | currency:'USD'}}
           </div>
-          <div class="form-group">
+
+          <div *ngIf="isActionProgress">
+            <img src="../../assets/loading.gif"/>
+          </div>
+
+          <div class="form-group" *ngIf="!isActionProgress">
             <button class="btn btn-primary">Submit</button>
           </div>
         </form>

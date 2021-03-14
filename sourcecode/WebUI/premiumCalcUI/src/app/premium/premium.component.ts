@@ -20,6 +20,7 @@ export class PremiumComponent implements OnInit {
   occupations: any[];
   rating: string;
   premium: number;
+  isActionProgress: boolean  = false;
 
   constructor(private titleService: Title, private formBuilder: FormBuilder, public dataService: DataService) {
     this.titleService.setTitle("Premium Finder");
@@ -38,9 +39,12 @@ export class PremiumComponent implements OnInit {
   }
 
   loadOccupations() {
+    this.isActionProgress = true;
+
     this.dataService.getAllOccupations().subscribe((response: any) => {
       this.occupations = response;
       this.premiumReqForm.get('occupation').setValue(response[0].occupationId);
+      this.isActionProgress = false;
     });
   }
 
@@ -52,8 +56,6 @@ export class PremiumComponent implements OnInit {
     this.invalidSumInsured = false;
     this.isfutureDate = false;
 
-    console.log('finding premium');
-    
     if (this.premiumReqForm.invalid || this.validateForm()) {
       return;
     }
@@ -65,18 +67,20 @@ export class PremiumComponent implements OnInit {
               dateOfBirth: this.premiumReqForm.get('dob').value
           };
 
+          this.isActionProgress = true;
+
           this.dataService.calculatePremium(request).subscribe((response: any) => {
                 this.premiumFound = true;
                 this.rating = response.ratingDesc;
                 this.premium = response.deathPremium;
+
+                this.isActionProgress = false;
           });
           
     }
   }
 
   validateForm() : boolean{
-      debugger;
-
       if( this.premiumReqForm.get('sumInsured').value <= 0){
         this.invalidSumInsured = true;
       }
