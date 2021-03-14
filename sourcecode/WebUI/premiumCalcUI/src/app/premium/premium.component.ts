@@ -52,6 +52,8 @@ export class PremiumComponent implements OnInit {
     this.invalidSumInsured = false;
     this.isfutureDate = false;
 
+    console.log('finding premium');
+    
     if (this.premiumReqForm.invalid || this.validateForm()) {
       return;
     }

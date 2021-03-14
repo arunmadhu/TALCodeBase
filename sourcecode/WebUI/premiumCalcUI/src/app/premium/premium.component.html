@@ -27,7 +27,7 @@
           <div class="form-group">
             <label>Occupation</label>
 
-            <mat-select formControlName="occupation" (change)="onSubmit()">
+            <mat-select formControlName="occupation" (selectionChange)="onSubmit()">
               <mat-option *ngFor="let ocp of occupations" [value]="ocp.occupationId" class="form-control" >
                 {{ocp.occupationName}}
               </mat-option>
@@ -48,7 +48,7 @@
             As your job rating is {{rating}}, the premium to be paid will be {{premium | currency:'USD'}}
           </div>
           <div class="form-group">
-            <button [disabled]="loading" class="btn btn-primary">Submit</button>
+            <button class="btn btn-primary">Submit</button>
           </div>
         </form>
       </div>

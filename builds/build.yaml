@@ -20,12 +20,15 @@ steps:
     restoreSolution: '$(Parameters.solution)'
 
 - task: NodeTool@0
-  displayName: 'Use Node 6.x'
-
-- task: NodeTool@0
   displayName: 'Use Node 12.x'
   inputs:
     versionSpec: 12.x
+
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    workingDir: sourcecode/WebUI/premiumCalcUI
+    verbose: false
 
 - task: VSBuild@1
   displayName: 'Build solution'
@@ -34,6 +37,14 @@ steps:
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactstagingdirectory)\\"'
     platform: '$(BuildPlatform)'
     configuration: '$(BuildConfiguration)'
+
+- task: Npm@1
+  displayName: 'npm build'
+  inputs:
+    command: custom
+    workingDir: sourcecode/WebUI/premiumCalcUI
+    verbose: false
+    customCommand: 'run prod-build'
 
 - task: VSTest@2
   displayName: 'Test Assemblies'
