@@ -13,7 +13,7 @@ namespace PremiumFinder.ApiServices.MiddleWare
         private readonly bool _isDevelopment;
 
         /// <summary>
-        /// GlobalExceptionHandler 
+        /// GlobalExceptionHandler for handling exceptions.
         /// </summary>
         /// <param name="next">next- Reference for the next Middleware in the pipeline</param>
         /// <param name="logger"> reference fo the current logprovider</param>

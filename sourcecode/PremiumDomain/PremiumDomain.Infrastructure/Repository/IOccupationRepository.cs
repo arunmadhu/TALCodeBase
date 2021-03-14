@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PremiumDomain.Infrastructure 
 {
+    /// <summary>
+    /// Occupation repository definitions
+    /// </summary>
     public interface IOccupationRepository
     {
         IList<Occupation> GetOccupations();

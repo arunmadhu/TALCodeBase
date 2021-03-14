@@ -11,11 +11,21 @@ namespace PremiumDomain.Services
     public class PremiumService : IPremiumService
     {
         private readonly IOccupationRepository _occupationRepository;
+
+        /// <summary>
+        /// Premium Service constructor 
+        /// </summary>
+        /// <param name="occupationRepository">Occupation repository object</param>
         public PremiumService(IOccupationRepository occupationRepository)
         {
             _occupationRepository = occupationRepository;
         }
 
+        /// <summary>
+        /// Repo service which calculates the premium based on user inputs
+        /// </summary>
+        /// <param name="premiumRequest">User provided information</param>
+        /// <returns>View object with premium details <returns>
         public PremiumView CalculatePremium(PremiumRequestView premiumRequest)
         {
             decimal deathPremium;
@@ -38,6 +48,10 @@ namespace PremiumDomain.Services
             return response;
         }
 
+        /// <summary>
+        /// Repo Service returning all occupations
+        /// </summary>
+        /// <returns></returns>
         public IList<Occupation> GetOccupations()
         {
             return _occupationRepository.GetOccupations();

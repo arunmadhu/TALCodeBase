@@ -13,13 +13,22 @@ namespace PremiumFinder.ApiServices.Controllers
     {
         private readonly IPremiumService _premiumService;
         private readonly IMapper _mapper;
+
+        /// <summary>
+        /// Premium api service controller constructor
+        /// </summary>
+        /// <param name="premiumService">Service object</param>
+        /// <param name="mapper">Automapper object</param>
         public PremiumController(IPremiumService premiumService, IMapper mapper)
         {
             _premiumService = premiumService;
             _mapper = mapper;
         }
 
-
+        /// <summary>
+        /// Returns all occupations available
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("occupations")]
         public IActionResult GetAllOccupations()
@@ -28,6 +37,11 @@ namespace PremiumFinder.ApiServices.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Calulates the premium based on the user information
+        /// </summary>
+        /// <param name="userData">Input received from user</param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult GetPremium(PremiumCalcRequest userData)
         {

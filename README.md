@@ -19,4 +19,6 @@ Steps in running the app.
 4. It also contains the url where the angular app is running. Make sure it is the correct port, else you will receive CORS error in angular app. 
 
 5. Run the angular app using ng serve. This should run in the default port 4200.
-6. Angular app has the appsettings.json in the root folder. This contains the url to the web api. Make sure it is configured to the correct port. 
+6. Angular app has the appsettings.json in the root folder. This contains the url to the web api. Make sure it is configured to the correct port.
+
+7. The yaml file for building the application in Azure pipeline can be found in builds/build.yaml. 
