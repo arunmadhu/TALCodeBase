@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PremiumFinder.ApiServices", "PremiumFinder.ApiServices\PremiumFinder.ApiServices.csproj", "{E54058E6-9F15-4646-BB1F-96E70742DFF5}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PremiumDomain", "PremiumDomain", "{9B13D48F-5DD9-491B-9B71-CB39A3134752}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{B0710BDD-9296-468D-8212-F14A7BC91A64}"
@@ -25,8 +27,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebUI", "WebUI", "{16B37CFB-2A19-4595-ADCF-C2E277922FEC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTesting", "UnitTesting", "{C50C734E-21E9-4BE4-A15D-5DEC3357C7E5}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PremiumFinder.ApiServices", "PremiumFinder.ApiServices\PremiumFinder.ApiServices.csproj", "{E54058E6-9F15-4646-BB1F-96E70742DFF5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApiTest", "WebApiTest", "{3F3D86A7-1E13-44C8-97A9-DBFEA6D09D54}"
 EndProject

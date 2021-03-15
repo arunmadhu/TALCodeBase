@@ -1,3 +1,9 @@
+
+PRINT 'Creating database - TalDBMain'
+
+CREATE DATABASE [TalDBMain]
+GO
+
 USE [TalDBMain]
 GO
 /****** Object:  Table [dbo].[Occupation]    Script Date: 14-03-2021 11:32:02 ******/
@@ -67,3 +73,18 @@ REFERENCES [dbo].[Rating] ([RatingId])
 GO
 ALTER TABLE [dbo].[Occupation] CHECK CONSTRAINT [FK_Occupation_Rating]
 GO
+
+CREATE TABLE [dbo].[Log](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Message] [nvarchar](max) NULL,
+	[MessageTemplate] [nvarchar](max) NULL,
+	[Level] [nvarchar](128) NULL,
+	[TimeStamp] [datetimeoffset](7) NOT NULL,
+	[Exception] [nvarchar](max) NULL,
+	[Properties] [xml] NULL,
+	[LogEvent] [nvarchar](max) NULL,
+ CONSTRAINT [PK_Log] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]

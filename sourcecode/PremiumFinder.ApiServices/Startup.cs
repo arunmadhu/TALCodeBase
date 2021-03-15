@@ -74,9 +74,19 @@ namespace PremiumFinder.ApiServices
 
             app.UseAuthorization();
 
+            app.UseDefaultFiles();
+
+            app.UseStaticFiles();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseDefaultFiles(new DefaultFilesOptions
+            {
+                DefaultFileNames = new
+                    List<string> { "index.html" }
             });
         }
     }

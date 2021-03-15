@@ -6,7 +6,7 @@ namespace PremiumDomain.Model
 {
     public class PremiumRequestView
     {
-        public int SumInsured { get; set; }
+        public decimal SumInsured { get; set; }
         public int OccupationId { get; set; }
         public DateTime DateOfBirth { get; set; }
     }

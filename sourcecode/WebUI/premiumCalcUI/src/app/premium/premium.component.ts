@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { DataService } from '../shared/services/data.service';
 import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
 import { premiumRequest } from '../shared/model/premiumRequest';
+import { DateAdapter } from '@angular/material';
 
 @Component({
   selector: 'app-premium',
@@ -20,10 +21,13 @@ export class PremiumComponent implements OnInit {
   occupations: any[];
   rating: string;
   premium: number;
+  age: number;
   isActionProgress: boolean  = false;
+  maxDate: Date = new Date();
 
-  constructor(private titleService: Title, private formBuilder: FormBuilder, public dataService: DataService) {
+  constructor(private titleService: Title, private formBuilder: FormBuilder, public dataService: DataService, private dateAdapter: DateAdapter<Date>) {
     this.titleService.setTitle("Premium Finder");
+    this.dateAdapter.setLocale('en-GB'); 
   }
 
   ngOnInit() {
@@ -56,43 +60,49 @@ export class PremiumComponent implements OnInit {
     this.invalidSumInsured = false;
     this.isfutureDate = false;
 
-    if (this.premiumReqForm.invalid || this.validateForm()) {
+    if (this.premiumReqForm.invalid) {
       return;
     }
     else{
-          let request: premiumRequest = {
-              deathSumInsured :this.premiumReqForm.get('sumInsured').value,
-              occupationId: this.premiumReqForm.get('occupation').value,
-              userName: this.premiumReqForm.get('userName').value,
-              dateOfBirth: this.premiumReqForm.get('dob').value
-          };
-
-          this.isActionProgress = true;
-
-          this.dataService.calculatePremium(request).subscribe((response: any) => {
-                this.premiumFound = true;
-                this.rating = response.ratingDesc;
-                this.premium = response.deathPremium;
-
-                this.isActionProgress = false;
-          });
-          
+        this.validateForm();
+        if(this.invalidSumInsured || this.isfutureDate)
+          return;
     }
+    let request: premiumRequest = {
+        deathSumInsured :this.premiumReqForm.get('sumInsured').value,
+        occupationId: this.premiumReqForm.get('occupation').value,
+        userName: this.premiumReqForm.get('userName').value,
+        dateOfBirth: this.premiumReqForm.get('dob').value
+    };
+
+    this.isActionProgress = true;
+
+    this.dataService.calculatePremium(request).subscribe((response: any) => {
+          this.premiumFound = true;
+          this.rating = response.ratingDesc;
+          this.premium = response.deathPremium;
+          this.age = response.age;
+          
+          this.isActionProgress = false;
+    });
   }
 
-  validateForm() : boolean{
+  validateForm(){
       if( this.premiumReqForm.get('sumInsured').value <= 0){
         this.invalidSumInsured = true;
       }
+      this.checkDob();
+  }
 
-      if( this.premiumReqForm.get('dob').value){
-        let inputDate = new Date(this.premiumReqForm.get('dob').value).setHours(0,0,0,0);
-        let today = new Date().setHours(0,0,0,0);
-        if(inputDate >= today)
-            this.isfutureDate = true;
-      }
+  checkDob()  {
+    this.isfutureDate = false;
+    if( this.premiumReqForm.get('dob').value){
+      let inputDate = new Date(this.premiumReqForm.get('dob').value).setHours(0,0,0,0);
+      let today = new Date().setHours(0,0,0,0);
+      if(inputDate > today)
+          this.isfutureDate = true;
+    }
 
-      return this.invalidSumInsured || this.isfutureDate;
   }
 }
 

@@ -10,5 +10,7 @@ namespace PremiumFinder.ApiServices.Models
         public string RatingDesc { get; set; }
 
         public decimal DeathPremium { get; set; }
+
+        public int Age { get; set; }
     }
 }

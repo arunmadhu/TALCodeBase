@@ -27,6 +27,6 @@ namespace PremiumFinder.ApiServices.Models
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Death Sum Insured should be greater than 0")]
-        public int DeathSumInsured { get; set; }
+        public decimal DeathSumInsured { get; set; }
     }
 }

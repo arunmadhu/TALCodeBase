@@ -5,23 +5,32 @@
         <h2>Premium Analysis</h2>
         <form [formGroup]="premiumReqForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
-            <label>Full Name</label>
+            <label class="label label-primary">Full Name</label>
             <input type="text" formControlName="userName" class="form-control" [ngClass]="{ 'is-invalid': submitted && form.userName.errors }" />
             <div *ngIf="submitted && form.userName.errors" class="invalid-feedback">
               <div *ngIf="form.userName.errors.required">User Name is required</div>
             </div>
           </div>
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <label>Date of Birth (DD/MM/YYYY)</label>
+              <input matInput [matDatepicker]="picker" formControlName="dob" [max]="maxDate" class="form-control" (change) = "checkDob()" 
+                    [ngClass]="{ 'is-invalid': submitted && form.dob.errors }" readonly />
+              <div *ngIf="submitted && form.dob.errors" class="invalid-feedback">
+                <div *ngIf="form.dob.errors.required">Date of birth is required</div>
+              </div>
+              
+            </div>
+            <div class="col-sm-6 align-self-end">
+              <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </div>
+          </div>
+
           <div class="form-group">
-            <label>Date of Birth (MM/DD/YYYY)</label>
-            <input matInput [matDatepicker]="picker" formControlName="dob" class="form-control" [ngClass]="{ 'is-invalid': submitted && form.dob.errors }" />
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-            <div *ngIf="submitted && form.dob.errors" class="invalid-feedback">
-              <div *ngIf="form.dob.errors.required">Date of birth is required</div>
-            </div>
-            <div class="alert alert-danger" role="alert" *ngIf="isfutureDate">
+            <div class="alert alert-danger col-md-12" role="alert" *ngIf="isfutureDate">
               Date of birth should be a date from the past. 
-            </div>
+            </div>  
           </div>
 
           <div class="form-group">
@@ -45,7 +54,7 @@
             </div>
           </div>
           <div class="alert alert-success" role="alert" *ngIf="premiumFound">
-            As your job rating is {{rating}}, the premium to be paid will be {{premium | currency:'USD'}}
+            Considering your age as {{age}} years and job rating as {{rating}}, the premium to be paid will be {{premium | currency:'USD'}}
           </div>
 
           <div *ngIf="isActionProgress">

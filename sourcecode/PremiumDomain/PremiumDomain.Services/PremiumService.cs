@@ -43,6 +43,7 @@ namespace PremiumDomain.Services
 
                 response.DeathPremium = Math.Round(deathPremium, 2);
                 response.RatingDesc = occupation.Rating.RatingName;
+                response.Age = age;
             }
 
             return response;
