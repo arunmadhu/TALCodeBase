@@ -63,7 +63,6 @@ namespace PremiumFinder.ApiServiceTest
             var premiumResponse = new PremiumResponse();
 
             var apiRequest = fixture.Build<PremiumCalcRequest>()
-                            .With(p => p.Age, 75)
                             .With(p => p.DateOfBirth, DateTime.Now.AddYears(-75))
                             .With(p => p.DeathSumInsured, 1000000)
                             .With(p => p.OccupationId, 4)

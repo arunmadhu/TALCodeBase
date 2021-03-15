@@ -14,9 +14,6 @@ namespace PremiumFinder.ApiServices.Models
         public string UserName { get; set; }
 
         [Required]
-        public int Age { get; set; }
-
-        [Required]
         public int OccupationId { get; set; }
 
 
