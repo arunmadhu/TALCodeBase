@@ -24,6 +24,7 @@ export class PremiumComponent implements OnInit {
   age: number;
   isActionProgress: boolean  = false;
   maxDate: Date = new Date();
+  minDate: Date;
 
   constructor(private titleService: Title, private formBuilder: FormBuilder, public dataService: DataService, private dateAdapter: DateAdapter<Date>) {
     this.titleService.setTitle("Premium Finder");
@@ -37,6 +38,9 @@ export class PremiumComponent implements OnInit {
       occupation: ['', [Validators.required]],
       sumInsured: ['', [Validators.required]]
     });
+
+    this.minDate = new Date();
+    this.minDate.setFullYear(this.minDate.getFullYear() - 150);
 
     this.loadOccupations();
 
@@ -79,7 +83,7 @@ export class PremiumComponent implements OnInit {
 
     this.dataService.calculatePremium(request).subscribe((response: any) => {
           this.premiumFound = true;
-          this.rating = response.ratingDesc;
+          this.rating = response.ratingDesc.trim();
           this.premium = response.deathPremium;
           this.age = response.age;
           

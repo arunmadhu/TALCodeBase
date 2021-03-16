@@ -12,11 +12,8 @@ export class HttpServiceInetrceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     
-    console.log('HttpServiceInetrceptor');
-
     return next.handle(request)
       .pipe(catchError((errorResponse: HttpErrorResponse) => {
-        console.log('HttpServiceInetrceptor error');
 
         if (errorResponse instanceof HttpErrorResponse) {
           if (errorResponse.status == 400) {

@@ -14,14 +14,14 @@
           <div class="form-group row">
             <div class="col-sm-6">
               <label>Date of Birth (DD/MM/YYYY)</label>
-              <input matInput [matDatepicker]="picker" formControlName="dob" [max]="maxDate" class="form-control" (change) = "checkDob()" 
+              <input matInput [matDatepicker]="picker" formControlName="dob" [min]="minDate" [max]="maxDate" class="form-control" (change) = "checkDob()" 
                     [ngClass]="{ 'is-invalid': submitted && form.dob.errors }" readonly />
               <div *ngIf="submitted && form.dob.errors" class="invalid-feedback">
                 <div *ngIf="form.dob.errors.required">Date of birth is required</div>
               </div>
               
             </div>
-            <div class="col-sm-6 align-self-end">
+            <div class="col-sm-6 align-self-center">
               <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </div>
